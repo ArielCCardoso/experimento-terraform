@@ -21,9 +21,9 @@ validate:
 
 plan:
         echo "Plan... Provider: ${provider} ambiente: ${env}"
-		terraform plan -input=false -out=${provider}/${env}/${env}-terraform.tfplan -state=${provider}/${env}/${env}-terraform.tfstate ${provider}/${env}
+		terraform plan -input=false -out="${provider}/${env}/${env}-terraform.tfplan" -state="${provider}/${env}/${env}-terraform.tfstate" ${provider}/${env}
 
 apply:
         echo "Apply... Provider: ${provider} ambiente: ${env}"
-		terraform apply -input=false -state=${provider}/${env}/${env}-terraform.tfstate ${provider}/${env}/${env}-terraform.tfplan
+		terraform apply -input=false -state="${provider}/${env}/${env}-terraform.tfstate" "${provider}/${env}/${env}-terraform.tfplan"
 
