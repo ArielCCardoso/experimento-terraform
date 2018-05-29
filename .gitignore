@@ -11,5 +11,9 @@
 # .tfvars files
 *.tfvars
 
+# .tfplan files
+*.tfplan
+*.tfplan.*
+
 
 # End of https://www.gitignore.io/api/terraform
