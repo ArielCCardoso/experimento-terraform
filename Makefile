@@ -11,7 +11,7 @@ endif
 all:
         echo "Informe a ação a realizar: init, validate, plan, apply"
 
-init:
+init: az-get-access-token
         echo "Init... Provider: ${provider} ambiente: ${env}"
 		terraform init -input=false ${provider}/${env}
 
@@ -26,4 +26,7 @@ plan:
 apply:
         echo "Apply... Provider: ${provider} ambiente: ${env}"
 		terraform apply -input=false -state="${provider}/${env}/${env}-terraform.tfstate" "${provider}/${env}/${env}-terraform.tfplan"
+
+az-get-access-token:
+		az account get-access-token
 
