@@ -1,13 +1,10 @@
 /*
     Arquivo de declara, define e atribui valores e tipos de valores as variaveis para criar os recursos na Azure.
 */
-#Inputs variavel 'tags'
-locals {
-    inputs {
-        Environment = "${var.env}"
-        Project     = "project-${var.project}"
-    }
-}
+
+#Inputs
+variable env { }
+variable project { }
 
 #Global
 variable "location" {
@@ -20,7 +17,7 @@ variable "tags" {
     description = "Tags associadas aos recursos criados na Azure."
     type        = "map"
     default     = {
-        #Environment = "${local.inputs.Environment}"
+        #Environment = "dev"
         Provisioner = "Terraform"
         #Project     = ${format("%s", (join("", ["public", var.project])))}
     }
