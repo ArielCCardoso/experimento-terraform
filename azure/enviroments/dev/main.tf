@@ -1,5 +1,13 @@
 #Main
+terraform {
+    #TODO
+    # CONFIGURAR VERSÕES DO TERRAFORM
+    #required_version = "> 0.7.0"
+}
+
 provider "azurerm" {
+    #TODO
+    # CONFIGURAR VERSÕES DO PLUGIN
 }
 
 #Inputs variavel 'tags'
