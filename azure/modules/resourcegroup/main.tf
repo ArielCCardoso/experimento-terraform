@@ -1,9 +1,9 @@
-#Main
+/*
+    Arquivo que cria o resource group na Azure.
+*/
 
-resource "azurerm_resource_group" "myterraformgroup" {
-    name     = "teste-tf"
-    location = "eastus"
-    tags {
-        environment = "Terraform Demo"
-    }
+resource "azurerm_resource_group" "resourcegroup" {
+    name     = "${var.resource_group_name}"
+    location = "${var.location}"
+    tags     = "${var.tags}"
 }

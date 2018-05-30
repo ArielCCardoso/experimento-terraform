@@ -1,25 +1,25 @@
 /*
-    Arquivo que resulta nas saída do recurso de rede criado na Azure.
+    Arquivo que resulta nas saídas do recurso de rede criado na Azure.
 */
 
 output "vnet_id" {
     description = "Id da vNet criada."
-    value       = "${azurerm_virtual_network.vnet.id}"
+    value       = "${azurerm_virtual_network.network.id}"
 }
 
 output "vnet_name" {
     description = "Nome da vNet criada."
-    value       = "${azurerm_virtual_network.vnet.name}"
+    value       = "${azurerm_virtual_network.network.name}"
 }
 
 output "vnet_address_space" {
     description = "Endereçamento das vNets criadas."
-    value       = "${azurerm_virtual_network.vnet.address_space}"
+    value       = "${azurerm_virtual_network.network.address_space}"
 }
 
 output "vnet_subnet" {
     description = "Subnet criadas na vNet."
-    value       = "${azurerm_virtual_network.vnet.subnet}"
+    value       = "${azurerm_virtual_network.network.subnet}"
 }
 /*
 output "vnet_dns_servers" {
