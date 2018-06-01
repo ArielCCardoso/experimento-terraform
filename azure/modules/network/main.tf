@@ -12,4 +12,5 @@ resource "azurerm_virtual_network" "network" {
         address_prefix  = "${var.vnet_subnet_prefix}"
     }
     tags                = "${var.tags}"
+    depends_on = ["module.resourcegroup.azurerm_resource_group.resourcegroup"]
 }
