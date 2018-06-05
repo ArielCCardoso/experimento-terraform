@@ -37,11 +37,6 @@ output "vnet_subnet" {
 */
 
 #Modulo subnet
-output "subnets" {
-    description = "Nome da subnet criada."
-    value       = "${module.subnet.subnets}"
-}
-
 output "subnet_name" {
     description = "Nome da subnet criada."
     value       = "${module.subnet.subnet_name}"
