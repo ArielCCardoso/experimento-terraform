@@ -10,16 +10,19 @@ variable project { }
 variable "location" {
     description = "Local/Região onde serão criados os recursos. Para consulta completa acesse: https://azure.microsoft.com/regions"
     type        = "string"
-    default     = "location-default"
+    default     = "East US 2"
 }
 
 variable "tags" {
     description = "Tags associadas aos recursos criados na Azure."
     type        = "map"
     default     = {
-        #Environment = "dev"
+        Maintenance = "Ariel C. Cardoso <ariel.cardoso.ext@telefonica.com>"
+        ISV         = "TRIAD Systems"
+        Diretoria   = "Big Data"
+        Area        = "4th Platform"
+        Frente      = "DevOps"
         Provisioner = "Terraform"
-        #Project     = ${format("%s", (join("", ["public", var.project])))}
     }
 }
 
@@ -33,9 +36,10 @@ variable "vnet_address_space" { type = "list" }
 
 variable "vnet_dns_servers" { type = "list" }
 
-variable "vnet_subnet_prefix" { }
+#variable "vnet_subnet_prefix" { }
 
-variable "vnet_subnet_name" { }
+#variable "vnet_subnet_name" { }
 
-
+#Modulo subnet
+variable "subnets" { type = "list" }
 

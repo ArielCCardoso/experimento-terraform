@@ -16,12 +16,12 @@ output "vnet_address_space" {
     description = "Endereçamento das vNets criadas."
     value       = "${azurerm_virtual_network.network.address_space}"
 }
-
+/*
 output "vnet_subnet" {
     description = "Subnet criadas na vNet."
     value       = "${azurerm_virtual_network.network.subnet}"
 }
-/*
+
 output "vnet_dns_servers" {
     description = "Servidores DNS atachados na vNet."
     value       = "${azurerm_virtual_network.vnet.dns_servers}"

@@ -3,6 +3,11 @@
 */
 
 #Modulo resourcegroup
+output "resource_group_id" {
+    description = "Id do resource group criado."
+    value       = "${module.resourcegroup.resource_group_id}"
+}
+
 output "resource_group_name" {
     description = "Nome do resource group criado."
     value       = "${module.resourcegroup.resource_group_name}"
@@ -24,7 +29,30 @@ output "vnet_address_space" {
     value       = "${module.network.vnet_address_space}"
 }
 
+/*
 output "vnet_subnet" {
     description = "Subnet criadas na vNet."
     value       = "${module.network.vnet_subnet}"
+}
+*/
+
+#Modulo subnet
+output "subnets" {
+    description = "Nome da subnet criada."
+    value       = "${module.subnet.subnets}"
+}
+
+output "subnet_name" {
+    description = "Nome da subnet criada."
+    value       = "${module.subnet.subnet_name}"
+}
+
+output "subnet_id" {
+    description = "Nome da subnet criada."
+    value       = "${module.subnet.subnet_id}"
+}
+
+output "subnet_address_prefix" {
+    description = "Nome da subnet criada."
+    value       = "${module.subnet.subnet_address_prefix}"
 }

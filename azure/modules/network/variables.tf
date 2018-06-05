@@ -5,10 +5,7 @@
 #Variaveis do modulo
 variable "resource_group_name" { }
 variable "location" { }
-
-variable "tags" {
-    type        = "map"
-}
+variable "tags" { type = "map" }
 
 variable "vnet_name" {
     description = "Nome da vNet criada"
@@ -22,7 +19,7 @@ variable "vnet_address_space" {
     */
     description = "CIDR da vNet criada."
     type        = "list"
-    default     = ["10.200.0.0/23"]
+    default     = ["10.0.0.0/8"]
 
 }
 
@@ -32,12 +29,12 @@ variable "vnet_dns_servers" {
     type        = "list"
     default     = []
 }
-
+/*
 variable "vnet_subnet_prefix" {
     /*
         Pode ser declarado somente como string!
         Estudar viabilidade de passar mais um valor.
-    */
+    * /
     description = "Endereçamento da subnet."
     type        = "string"
     default     = "10.200.0.0/25"
@@ -47,8 +44,9 @@ variable "vnet_subnet_name" {
     /*
         Pode ser declarado somente como string!
         Estudar viabilidade de passar mais um valor.
-    */
+    * /
     description = "Nome ou lista das subnets criadas na vNet."
     type        = "string"
     default     = "subnet-default"
 }
+*/

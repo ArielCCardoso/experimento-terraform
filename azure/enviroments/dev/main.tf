@@ -28,7 +28,7 @@ locals {
     }
     resource_group_name = "${var.resource_group_name}-${var.project}-${var.env}"
     vnet_name           = "${var.vnet_name}-${var.project}-${var.env}"
-    vnet_subnet_name    = "${var.vnet_subnet_name}-${var.project}-${var.env}"
+    #vnet_subnet_name    = "${var.vnet_subnet_name}-${var.project}-${var.env}"
 }
 
 module "resourcegroup" {
@@ -37,25 +37,37 @@ module "resourcegroup" {
     tags                = "${merge(local.tags, var.tags)}"
     source              = "../../modules/resourcegroup"
 }
+/*
 resource "null_resource" "wait_resourcegroup" {
-    #depends_on = ["module.resourcegroup"]
-    /*provisioner "local-exec" {
+    depends_on = ["module.resourcegroup"]
+    provisioner "local-exec" {
         command = "sleep 20"
         interpreter = ["bash", "-c"]
-    }*/
+    }
 }
+*/
 
 module "network" {
     vnet_name           = "${local.vnet_name}"
     location            = "${var.location}"
     resource_group_name = "${module.resourcegroup.resource_group_name}"
     vnet_address_space  = "${var.vnet_address_space}"
-    vnet_subnet_name    = "${local.vnet_subnet_name}"
-    vnet_subnet_prefix  = "${var.vnet_subnet_prefix}"
+    #vnet_subnet_name    = "${local.vnet_subnet_name}"
+    #vnet_subnet_prefix  = "${var.vnet_subnet_prefix}"
     tags                = "${merge(local.tags, var.tags)}"
     source              = "../../modules/network"
 }
+/*
 resource "null_resource" "wait_network" {
     #depends_on = ["module.network"]
+}
+*/
+module "subnet" {
+    vnet_name           = "${module.network.vnet_name}"
+    location            = "${var.location}"
+    resource_group_name = "${module.resourcegroup.resource_group_name}"
+    subnets             = "${var.subnets}"
+    tags                = "${merge(local.tags, var.tags)}"
+    source              = "../../modules/subnet"
 }
 
