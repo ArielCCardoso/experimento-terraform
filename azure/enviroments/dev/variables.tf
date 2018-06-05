@@ -43,3 +43,8 @@ variable "vnet_dns_servers" { type = "list" }
 #Modulo subnet
 variable "subnets" { type = "list" }
 
+#Modulo networkinterface
+variable "networkinterfaces" { type = "list" }
+variable "networkinterface_public_ip" { }
+variable "public_ips_ids" { type = "list" }
+

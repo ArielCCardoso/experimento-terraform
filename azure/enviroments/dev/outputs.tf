@@ -51,3 +51,17 @@ output "subnet_address_prefix" {
     description = "Nome da subnet criada."
     value       = "${module.subnet.subnet_address_prefix}"
 }
+
+#Modulo networkinterface
+output "network_inteface_name" {
+    description = "Nome da interface de rede criada."
+    value       = "${module.networkinterface.network_inteface_name}"
+}
+output "network_inteface_id" {
+    description = "Nome da interface de rede criada."
+    value       = "${module.networkinterface.network_inteface_id}"
+}
+output "network_inteface_ip_configuration" {
+    description = "Nome da interface de rede criada."
+    value       = "${module.networkinterface.network_inteface_ip_configuration}"
+}

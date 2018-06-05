@@ -71,3 +71,14 @@ module "subnet" {
     source              = "../../modules/subnet"
 }
 
+module "networkinterface" {
+    networkinterfaces   = "${var.networkinterfaces}"
+    location            = "${var.location}"
+    resource_group_name = "${module.resourcegroup.resource_group_name}"
+    vnet_id             = "${module.network.vnet_id}"
+    subnet_ids          = "${module.subnet.subnet_id}"
+    public_ips_ids      = "${var.public_ips_ids}"
+    tags                = "${merge(local.tags, var.tags)}"
+    source              = "../../modules/networkinterface"
+}
+
