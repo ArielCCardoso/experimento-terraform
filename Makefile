@@ -13,24 +13,36 @@ $(error Enter a value for provider. Example: provider=azure)
 endif
 
 all:
-        echo "Informe a ação a realizar: init, validate, plan, apply"
+	echo "Informe a ação a realizar: init, validate, plan, apply"
 
-init: az-get-access-token
-        echo "Init... Provider: ${provider} ambiente: ${env}"
-		terraform init -input=false ${provider}/${env}
+#init : az-get-access-token
+init: azgetaccesstoken
+	echo "Init... Provider: ${provider} ambiente: ${env}"
+	terraform init -input=false ${provider}/enviroments/${env}
 
 validate:
-        echo "Validade... Provider: ${provider} ambiente: ${env}"
-		terraform validate -var "env=${env} project=${project}" -var-file="${provider}/${env}/${env}-terraform.tfvars" ${provider}/${env}
+	echo "Validade... Provider: ${provider} ambiente: ${env}"
+	terraform validate -var "env=${env}" -var "project=${project}" -var-file="${provider}/enviroments/${env}/terraform.tfvars" ${provider}/enviroments/${env}
 
 plan:
-        echo "Plan... Provider: ${provider} ambiente: ${env}"
-		terraform plan -input=false -out="${provider}/${env}/${env}-terraform.tfplan" -state="${provider}/${env}/${env}-terraform.tfstate" -var "env=${env} project=${project}" -var-file="${provider}/${env}/${env}-terraform.tfvars" ${provider}/${env}
+	echo "Plan... Provider: ${provider} ambiente: ${env}"
+	terraform plan -parallelism=1 -input=false -out="${provider}/enviroments/${env}/terraform.tfplan" -state="${provider}/enviroments/${env}/terraform.tfstate" -var "env=${env}" -var "project=${project}" -var-file="${provider}/enviroments/${env}/terraform.tfvars" ${provider}/enviroments/${env}
 
+destroy:
+	echo "Destroy... Provider: ${provider} ambiente: ${env}"
+	terraform destroy -parallelism=1 -input=false -state="${provider}/enviroments/${env}/terraform.tfstate" -var "env=${env}" -var "project=${project}" -var-file="${provider}/enviroments/${env}/terraform.tfvars" -auto-approve
+	$(MAKE) refresh
+		
 apply:
-        echo "Apply... Provider: ${provider} ambiente: ${env}"
-		terraform apply -input=false -state="${provider}/${env}/${env}-terraform.tfstate" -var "env=${env} project=${project}" -var-file="${provider}/${env}/${env}-terraform.tfvars" "${provider}/${env}/${env}-terraform.tfplan"
+	echo "Apply... Provider: ${provider} ambiente: ${env}"
+	terraform apply -auto-approve -parallelism=1 -input=false -state="${provider}/enviroments/${env}/terraform.tfstate" -var "env=${env}" -var "project=${project}" -var-file="${provider}/enviroments/${env}/terraform.tfvars" "${provider}/enviroments/${env}/"
+	$(MAKE) refresh
 
-az-get-access-token:
-		az account get-access-token
+azgetaccesstoken:
+	az account get-access-token
 
+refresh:
+	echo "Refresh... Provider: ${provider} ambiente: ${env}"
+	terraform refresh -input=false -state="${provider}/enviroments/${env}/terraform.tfstate" -var "env=${env}" -var "project=${project}" -var-file="${provider}/enviroments/${env}/terraform.tfvars"
+		
+		
