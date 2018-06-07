@@ -40,10 +40,6 @@ module "resourcegroup" {
 /*
 resource "null_resource" "wait_resourcegroup" {
     depends_on = ["module.resourcegroup"]
-    provisioner "local-exec" {
-        command = "sleep 20"
-        interpreter = ["bash", "-c"]
-    }
 }
 */
 
@@ -59,9 +55,10 @@ module "network" {
 }
 /*
 resource "null_resource" "wait_network" {
-    #depends_on = ["module.network"]
+    depends_on = ["module.network"]
 }
 */
+
 module "subnet" {
     vnet_name           = "${module.network.vnet_name}"
     location            = "${var.location}"
@@ -70,15 +67,25 @@ module "subnet" {
     tags                = "${merge(local.tags, var.tags)}"
     source              = "../../modules/subnet"
 }
+/*
+resource "null_resource" "wait_subnet" {
+    depends_on = ["module.subnet"]
+}
+*/
 
 module "networkinterface" {
     networkinterfaces   = "${var.networkinterfaces}"
     location            = "${var.location}"
     resource_group_name = "${module.resourcegroup.resource_group_name}"
+    #resource_group_id   = "${module.resourcegroup.resource_group_id}"
     vnet_id             = "${module.network.vnet_id}"
     subnet_ids          = "${module.subnet.subnet_id}"
     public_ips_ids      = "${var.public_ips_ids}"
     tags                = "${merge(local.tags, var.tags)}"
     source              = "../../modules/networkinterface"
 }
-
+/*
+resource "null_resource" "networkinterface" {
+    depends_on = ["module.networkinterface"]
+}
+*/

@@ -45,6 +45,6 @@ variable "subnets" { type = "list" }
 
 #Modulo networkinterface
 variable "networkinterfaces" { type = "list" }
-variable "networkinterface_public_ip" { }
+#variable "networkinterface_public_ip" { }
 variable "public_ips_ids" { type = "list" }
 

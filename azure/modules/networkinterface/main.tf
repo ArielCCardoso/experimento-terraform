@@ -70,19 +70,30 @@ if "${var.networkinterface_public_ip}" {
         tags = "${var.tags}"
     }
 }
+
+locals {
+    resource_group_id = "${var.resource_group_id}/providers/Microsoft.Network/publicIPAddresses/"
+    #public_ip_name    = "${lookup(var.networkinterfaces[count.index], "public_ip_name")}"
+    #public_ip_id      = "${local.resource_group_id}${local.public_ip_name}"
+    public_ip_id = ""
+    public_ip_name = ""
+}
 */
 resource "azurerm_network_interface" "networkinterface" {
     count                     = "${length(var.networkinterfaces)}"
     name                      = "${lookup(var.networkinterfaces[count.index], "name")}"
     location                  = "${var.location}"
     resource_group_name       = "${var.resource_group_name}"
+    #local.public_ip_name      = "${lookup(var.networkinterfaces[count.index], "public_ip_name")}"
+    #local.public_ip_id        = "${local.resource_group_id}${local.public_ip_name}"
     #network_security_group_id = "${azurerm_network_security_group.myterraformnsg.id}"
     ip_configuration {
         name                          = "${lookup(var.networkinterfaces[count.index], "name")}-ip_conf"
         subnet_id                     = "${var.vnet_id}/subnets/${lookup(var.networkinterfaces[count.index], "subnet_name")}"
         private_ip_address_allocation = "${lookup(var.networkinterfaces[count.index], "ip_address_allocation")}"
         #public_ip_address_id          = "${var.networkinterface_public_ip == "true" ? "" : var.public_ips_ids[count.index]}"
-        public_ip_address_id          = "${lookup(var.networkinterfaces[count.index], "public_ip") == "true" ? var.public_ips_ids[count.index] : ""}"
+        public_ip_address_id          = "${lookup(var.networkinterfaces[count.index], "public_ip") == "true" ? "${var.public_ips_ids[count.index]}" : ""}"
+        #public_ip_address_id          = "${lookup(var.networkinterfaces[count.index], "public_ip") == "true" ? "${local.resource_group_id}${lookup(var.networkinterfaces[count.index], "public_ip_name")}" : ""}"
     }
     tags = "${var.tags}"
 }

@@ -4,16 +4,19 @@
 
 #Variaveis do modulo
 variable "resource_group_name" { }
+#variable "resource_group_id" { }
 variable "vnet_id" { }
 variable subnet_ids { }
 variable "tags" { type = "map" }
 variable "location" { }
 
+/*
 variable "networkinterface_public_ip" { 
     description = "Decisão se as interfaces de rede terão ip publico."
     type = "string" 
     default = false
 }
+*/
 
 variable "public_ips_ids" {
     description = "Lista dos IPs publicos que serão attachados nas interfaces de rede."
