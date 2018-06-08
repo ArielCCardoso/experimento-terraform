@@ -15,5 +15,10 @@
 *.tfplan
 *.tfplan.*
 
+# Graph files
+*.jpeg
+*.png
+*.svg
+*.jpg
 
 # End of https://www.gitignore.io/api/terraform
