@@ -43,7 +43,10 @@ azgetaccesstoken:
 #az account get-access-token
 
 graph: checkargs
-	terraform graph "${provider}/enviroments/${env}/" | dot -Tjpeg > "${provider}/enviroments/${env}/graph.jpeg"
+ifndef type
+$(error Enter a value for type. Example: type=plan / type=apply / type=destroy)
+endif
+	terraform graph -type="${type}" "${provider}/enviroments/${env}/" | dot -Tjpeg > "${provider}/enviroments/${env}/graph-${type}.jpeg"
 	
 refresh: checkargs
 	echo "Refresh... Provider: ${provider} ambiente: ${env}"
