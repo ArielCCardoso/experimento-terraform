@@ -40,11 +40,11 @@ apply: checkargs
 	$(MAKE) refresh
 
 azgetaccesstoken:
-#az account get-access-token
+	az account get-access-token
 
 graph: checkargs
 ifndef type
-$(error Enter a value for type. Example: type=plan / type=apply / type=destroy)
+$(error Enter a value for type. Example: type=plan / type=apply / type=refresh / type=input)
 endif
 	terraform graph -type="${type}" "${provider}/enviroments/${env}/" | dot -Tjpeg > "${provider}/enviroments/${env}/graph-${type}.jpeg"
 	
