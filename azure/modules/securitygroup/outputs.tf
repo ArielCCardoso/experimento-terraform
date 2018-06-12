@@ -13,6 +13,6 @@ output "name" {
 }
 
 output "security_rule" {
-    description = "Nome do security group criado."
+    description = "Rules do security group criado."
     value       = "${azurerm_network_security_group.securitygroup.security_rule}"
 }
