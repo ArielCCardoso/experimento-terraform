@@ -3,7 +3,7 @@
 */
 
 #Variaveis do modulo
-variable "resource_group_name" {
+variable "name" {
     description = "Nome do Resource Group usado para para criar a vNet."
     type        = "string"
     default     = "resourcegroup-default"

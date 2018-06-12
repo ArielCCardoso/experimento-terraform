@@ -3,10 +3,11 @@
 */
 
 resource "azurerm_virtual_network" "network" {
-    name                = "${var.vnet_name}"
+    name                = "${var.name}"
     location            = "${var.location}"
     resource_group_name = "${var.resource_group_name}"
-    address_space       = "${var.vnet_address_space}"
+    address_space       = "${var.address_space}"
+    dns_servers         = "${var.dns_servers }"
     /*
     subnet = {
         name            = "${var.vnet_subnet_name}"
