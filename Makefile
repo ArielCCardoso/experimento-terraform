@@ -14,7 +14,7 @@ $(error Enter a value for provider. Example: provider=azure)
 endif
 
 all:
-	echo "Informe a ação a realizar: init, validate, plan, apply"
+	echo "Informe a ação a realizar: init, validate, plan, apply, destroy, refresh, graph"
 	exit 1
 
 init: azgetaccesstoken checkargs
