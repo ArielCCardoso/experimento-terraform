@@ -3,15 +3,12 @@
 .DEFAULT_GOAL := all
 
 checkargs:
-ifndef env
-$(error Enter a value for env. Example: env=dev)
-endif
-ifndef project
-$(error Enter a value for project. Example: project=myproject)
-endif
-ifndef provider
-$(error Enter a value for provider. Example: provider=azure)
-endif
+	if [ "${env}" = "" ] || [ -z ${env} ]; then echo "Enter a value for env. Example: env=dev"; exit 1; fi
+	if [ "${project}" = "" ] || [ -z ${project} ]; then echo "Enter a value for project. Example: project=myproject"; exit 1; fi
+	if [ "${provider}" = "" ] || [ -z ${provider} ]; then echo "Enter a value for provider. Example: provider=azure"; exit 1; fi
+
+checkargsgraph:
+	if [ "${type}" = "" ] || [ -z ${type} ]; then echo "Enter a value for type. Example: type=plan / type=apply / type=refresh / type=input"; exit 1; fi
 
 all:
 	echo "Informe a ação a realizar: init, validate, plan, apply, destroy, refresh, graph"
@@ -42,14 +39,10 @@ apply: checkargs
 azgetaccesstoken:
 	az account get-access-token
 
-graph: checkargs
-ifndef type
-$(error Enter a value for type. Example: type=plan / type=apply / type=refresh / type=input)
-endif
+graph: checkargs checkargsgraph
 	terraform graph -type="${type}" "${provider}/enviroments/${env}/" | dot -Tjpeg > "${provider}/enviroments/${env}/graph-${type}.jpeg"
 	
-refresh: checkargs
+refresh: 	
 	echo "Refresh... Provider: ${provider} ambiente: ${env}"
 	terraform refresh -input=false -state="${provider}/enviroments/${env}/terraform.tfstate" -var "env=${env}" -var "project=${project}" -var-file="${provider}/enviroments/${env}/terraform.tfvars"
-		
-		
+
