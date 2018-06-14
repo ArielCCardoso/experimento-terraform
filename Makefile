@@ -14,7 +14,7 @@ all:
 	echo "Informe a ação a realizar: init, validate, plan, apply, destroy, refresh, graph"
 	exit 1
 
-init: azgetaccesstoken checkargs
+init: checkargs azgetaccesstoken
 	echo "Init... Provider: ${provider} ambiente: ${env}"
 	terraform init -input=false ${provider}/enviroments/${env}
 
