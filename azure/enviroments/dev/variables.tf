@@ -3,60 +3,55 @@
 */
 
 #Inputs
-variable env {}
+variable env { }
 
-variable project {}
+variable project { }
 
 #Global
 variable "location" {
-  description = "Local/Região onde serão criados os recursos. Para consulta completa acesse: https://azure.microsoft.com/regions"
-  type        = "string"
-  default     = "East US 2"
+	description = "Local/Região onde serão criados os recursos. Para consulta completa acesse: https://azure.microsoft.com/regions"
+	type        = "string"
+	default     = "East US 2"
 }
 
 variable "tags" {
-  description = "Tags associadas aos recursos criados na Azure."
-  type        = "map"
-
-  default = {
-    Maintenance = "Ariel C. Cardoso"
-    ISV         = "TRIAD Systems"
-    Diretoria   = "Big Data"
-    Area        = "4th Platform"
-    Frente      = "DevOps"
-    Provisioner = "Terraform"
-  }
+	description = "Tags associadas aos recursos criados na Azure."
+	type        = "map"
+	default = {
+	    Maintenance = "Ariel C. Cardoso"
+	    ISV         = "TRIAD Systems"
+	    Diretoria   = "Big Data"
+	    Area        = "4th Platform"
+	    Frente      = "DevOps"
+	    Provisioner = "Terraform"
+	}
 }
 
 #Modulo resourcegroup
-variable "resource_group_name" {}
+variable "resource_group_name" { }
 
 #Modulo network
-variable "vnet_name" {}
+variable "vnet_name" { }
 
 variable "vnet_address_space" {
-  type = "list"
+	type = "list"
 }
 
 variable "vnet_dns_servers" {
-  type = "list"
+	type = "list"
 }
-
-#variable "vnet_subnet_prefix" { }
-
-#variable "vnet_subnet_name" { }
 
 #Modulo subnet
 variable "subnets" {
-  type = "list"
+	type = "list"
 }
 
 #Modulo networkinterface
 variable "networkinterfaces" {
-  type = "list"
+	type = "list"
 }
 
 #variable "networkinterface_public_ip" { }
 variable "public_ips_ids" {
-  type = "list"
+	type = "list"
 }

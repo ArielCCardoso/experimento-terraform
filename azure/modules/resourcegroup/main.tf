@@ -3,7 +3,7 @@
 */
 
 resource "azurerm_resource_group" "resourcegroup" {
-  name     = "${var.name}"
-  location = "${var.location}"
-  tags     = "${var.tags}"
+	name     = "${var.name}"
+	location = "${var.location}"
+	tags     = "${var.tags}"
 }
